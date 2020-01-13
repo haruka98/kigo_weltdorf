@@ -123,14 +123,14 @@ void render_screen() {
 	base_back_1.y = 0;
 	base_back_1.w = 1357;
 	base_back_1.h = 628;
-	double scale = (double)screen_width / (double)base_back_1.w;
+	double scale = (double)screen_width * (5.0 / 6.0) / (double)base_back_1.w;
 	if(scale * (double)base_back_1.h > (double)screen_height) {
 		scale = (double)screen_height / (double)base_back_1.h;
 	}
 	SDL_Rect position_back_1;
 	position_back_1.w = (double)base_back_1.w * scale + 2;
 	position_back_1.h = (double)base_back_1.h * scale;
-	position_back_1.x = screen_width / 2 - position_back_1.w / 2 - 1;
+	position_back_1.x = (screen_width * 11) / 12 / 2 - position_back_1.w / 2 - 1;
 	position_back_1.y = screen_height / 2 - position_back_1.h / 2;
 	back_1 = IMG_Load("weltkarte.png");
 	back_texture = SDL_CreateTextureFromSurface(gRenderer, back_1);
