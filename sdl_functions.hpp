@@ -12,4 +12,6 @@ void clear_render();
 SDL_Color nCol(int r, int g, int b);
 void render_text(char* text, int x, int y, int size, int center, int f_color);
 
+void render_screen();
+
 #endif

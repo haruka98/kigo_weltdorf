@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
 		}
 		clear_render();
 		// render screen
+		render_screen();
 		render();
 	}
 	close_sdl();
