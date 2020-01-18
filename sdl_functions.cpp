@@ -7,6 +7,15 @@ SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 SDL_Texture* gTexture = NULL;
 
+SDL_Surface* person = NULL;
+SDL_Texture* person_texture = NULL;
+SDL_Surface* person_1 = NULL;
+SDL_Texture* person_texture_1 = NULL;
+SDL_Surface* person_2 = NULL;
+SDL_Texture* person_texture_2 = NULL;
+SDL_Surface* person_3 = NULL;
+SDL_Texture* person_texture_3 = NULL;
+
 enum KeyPressSurfaces {
 	KEY_PRESS_SURFACE_DEFAULT,
 	KEY_PRESS_SURFACE_UP,
@@ -137,4 +146,478 @@ void render_screen() {
 	SDL_RenderCopy(gRenderer, back_texture, &base_back_1, &position_back_1);
 	SDL_FreeSurface(back_1);
 	SDL_DestroyTexture(back_texture);
+}
+
+void render_person(int x, int y) {
+	double scale = 1.0;
+	SDL_Rect person_base;
+	person_base.x = 0;
+	person_base.y = 0;
+	person_base.w = 200;
+	person_base.h = 300;
+	SDL_Rect person_position;
+	person_position.x = x;
+	person_position.y = y;
+	if((double)screen_width / (double)5000 < (double)screen_height / (double)7500) {
+		scale = (double)screen_width / (double)5000;
+	} else {
+		scale = (double)screen_height / (double)7500;
+	}
+	person_position.w = (double)200 * (double)scale;
+	person_position.h = (double)300 * (double)scale;
+	SDL_RenderCopy(gRenderer, person_texture, &person_base, &person_position);
+}
+
+
+void render_big_person(int x, int y, int color) {
+	double scale = 1.0;
+	SDL_Rect person_base;
+	person_base.x = 0;
+	person_base.y = 0;
+	person_base.w = 200;
+	person_base.h = 300;
+	SDL_Rect person_position;
+	person_position.x = x;
+	person_position.y = y;
+	if((double)screen_width / (double)2500 < (double)screen_height / (double)3750) {
+		scale = (double)screen_width / (double)2500;
+	} else {
+		scale = (double)screen_height / (double)3750;
+	}
+	person_position.w = (double)200 * (double)scale;
+	person_position.h = (double)300 * (double)scale;
+	switch(color) {
+		case 0: {
+			SDL_RenderCopy(gRenderer, person_texture, &person_base, &person_position);
+			break;
+		}
+		case 1: {
+			SDL_RenderCopy(gRenderer, person_texture_1, &person_base, &person_position);
+			break;
+		}
+		case 2: {
+			SDL_RenderCopy(gRenderer, person_texture_2, &person_base, &person_position);
+			break;
+		}
+		case 3: {
+			SDL_RenderCopy(gRenderer, person_texture_3, &person_base, &person_position);
+			break;
+		}
+	}
+}
+
+void init_person() {
+	person = IMG_Load("gummibaerchen.png");
+	person_texture = SDL_CreateTextureFromSurface(gRenderer, person);
+	person_1 = IMG_Load("gummibaerchen_1.png");
+	person_texture_1 = SDL_CreateTextureFromSurface(gRenderer, person_1);
+	person_2 = IMG_Load("gummibaerchen_2.png");
+	person_texture_2 = SDL_CreateTextureFromSurface(gRenderer, person_2);
+	person_3 = IMG_Load("gummibaerchen_3.png");
+	person_texture_3 = SDL_CreateTextureFromSurface(gRenderer, person_3);
+}
+
+void quit_person() {
+	SDL_FreeSurface(person);
+	SDL_DestroyTexture(person_texture);
+	SDL_FreeSurface(person_1);
+	SDL_DestroyTexture(person_texture_1);
+	SDL_FreeSurface(person_2);
+	SDL_DestroyTexture(person_texture_2);
+	SDL_FreeSurface(person_3);
+	SDL_DestroyTexture(person_texture_3);
+}
+
+void render_statistics(int color[100]) {
+	int i = 0;
+	double scale = 1.0;
+	if((double)screen_width / (double)2500 < (double)screen_height / (double)3750) {
+		scale = (double)screen_width / (double)2500;
+	} else {
+		scale = (double)screen_height / (double)3750;
+	}
+	int person_w = (double)200 * (double)scale;
+	int person_h = (double)300 * (double)scale;
+	// first row
+	render_big_person(screen_width * 1 / 2 - person_w * 19 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 17 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 15 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 13 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 11 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 9 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 7 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 5 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 3 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 1 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 1 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 3 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 5 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 7 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 9 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 11 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 13 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 15 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 17 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 19 / 2, screen_height * 1 / 2 - person_h * 9 / 2, color[i]);
+	i++;
+	// second row
+	render_big_person(screen_width * 1 / 2 - person_w * 19 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 17 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 15 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 13 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 11 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 9 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 7 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 5 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 3 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 1 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 1 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 3 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 5 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 7 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 9 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 11 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 13 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 15 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 17 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 19 / 2, screen_height * 1 / 2 - person_h * 7 / 2, color[i]);
+	i++;
+	// third row
+	render_big_person(screen_width * 1 / 2 - person_w * 19 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 17 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 15 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 13 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 11 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 9 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 7 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 5 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 3 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 1 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 1 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 3 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 5 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 7 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 9 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 11 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 13 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 15 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 17 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 19 / 2, screen_height * 1 / 2 - person_h * 5 / 2, color[i]);
+	i++;
+	// fourth row
+	render_big_person(screen_width * 1 / 2 - person_w * 19 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 17 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 15 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 13 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 11 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 9 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 7 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 5 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 3 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 1 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 1 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 3 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 5 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 7 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 9 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 11 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 13 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 15 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 17 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 19 / 2, screen_height * 1 / 2 - person_h * 3 / 2, color[i]);
+	i++;
+	// fifth row
+	render_big_person(screen_width * 1 / 2 - person_w * 19 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 17 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 15 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 13 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 11 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 9 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 7 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 5 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 3 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 - person_w * 1 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 1 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 3 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 5 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 7 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 9 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 11 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 13 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 15 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 17 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	render_big_person(screen_width * 1 / 2 + person_w * 19 / 2, screen_height * 1 / 2 - person_h * 1 / 2, color[i]);
+	i++;
+	
+}
+
+void render_buttons() {
+	// Hunger
+	SDL_Rect rect;
+	rect.w = screen_width / 8;
+	rect.h = screen_height / 12;
+	rect.x = screen_width / 8 - screen_width / 16;
+	rect.y = screen_height * 3 / 5 - screen_height / 24;
+	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+	SDL_RenderFillRect(gRenderer, &rect);
+	int xval, yval;
+	SDL_GetMouseState(&xval, &yval);
+	if(xval > rect.x &&
+		xval < rect.x + rect.w &&
+		yval > rect.y &&
+		yval < rect.y + rect.h) {
+		SDL_Rect mrect;
+		mrect.w = rect.w + 2;
+		mrect.h = rect.h + 2;
+		mrect.x = rect.x - 1;
+		mrect.y = rect.y - 1;
+		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+		SDL_RenderFillRect(gRenderer, &mrect);
+	}
+	render_text("Hunger", screen_width / 8, screen_height * 3 / 5, 30, 1, 1);
+	// Armut
+	rect.w = screen_width / 8;
+	rect.h = screen_height / 12;
+	rect.x = screen_width / 8 - screen_width / 16 + screen_width / 8 + screen_width / 16;
+	rect.y = screen_height * 3 / 5 - screen_height / 24;
+	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+	SDL_RenderFillRect(gRenderer, &rect);
+	SDL_GetMouseState(&xval, &yval);
+	if(xval > rect.x &&
+		xval < rect.x + rect.w &&
+		yval > rect.y &&
+		yval < rect.y + rect.h) {
+		SDL_Rect mrect;
+		mrect.w = rect.w + 2;
+		mrect.h = rect.h + 2;
+		mrect.x = rect.x - 1;
+		mrect.y = rect.y - 1;
+		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+		SDL_RenderFillRect(gRenderer, &mrect);
+	}
+	render_text("Armut", screen_width / 8 + screen_width / 8 + screen_width / 16, screen_height * 3 / 5, 30, 1, 1);
+	// Krieg
+	rect.w = screen_width / 8;
+	rect.h = screen_height / 12;
+	rect.x = screen_width / 8 - screen_width / 16 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16;
+	rect.y = screen_height * 3 / 5 - screen_height / 24;
+	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+	SDL_RenderFillRect(gRenderer, &rect);
+	SDL_GetMouseState(&xval, &yval);
+	if(xval > rect.x &&
+		xval < rect.x + rect.w &&
+		yval > rect.y &&
+		yval < rect.y + rect.h) {
+		SDL_Rect mrect;
+		mrect.w = rect.w + 2;
+		mrect.h = rect.h + 2;
+		mrect.x = rect.x - 1;
+		mrect.y = rect.y - 1;
+		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+		SDL_RenderFillRect(gRenderer, &mrect);
+	}
+	render_text("Krieg", screen_width / 8 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16, screen_height * 3 / 5, 30, 1, 1);
+	// Wasser
+	rect.w = screen_width / 8;
+	rect.h = screen_height / 12;
+	rect.x = screen_width / 8 - screen_width / 16 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16;
+	rect.y = screen_height * 3 / 5 - screen_height / 24;
+	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+	SDL_RenderFillRect(gRenderer, &rect);
+	SDL_GetMouseState(&xval, &yval);
+	if(xval > rect.x &&
+		xval < rect.x + rect.w &&
+		yval > rect.y &&
+		yval < rect.y + rect.h) {
+		SDL_Rect mrect;
+		mrect.w = rect.w + 2;
+		mrect.h = rect.h + 2;
+		mrect.x = rect.x - 1;
+		mrect.y = rect.y - 1;
+		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+		SDL_RenderFillRect(gRenderer, &mrect);
+	}
+	render_text("Wasser", screen_width / 8 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16, screen_height * 3 / 5, 30, 1, 1);
+	// Obdachlos
+	rect.w = screen_width / 8;
+	rect.h = screen_height / 12;
+	rect.x = screen_width / 8 - screen_width / 16 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16;
+	rect.y = screen_height * 3 / 5 - screen_height / 24;
+	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+	SDL_RenderFillRect(gRenderer, &rect);
+	SDL_GetMouseState(&xval, &yval);
+	if(xval > rect.x &&
+		xval < rect.x + rect.w &&
+		yval > rect.y &&
+		yval < rect.y + rect.h) {
+		SDL_Rect mrect;
+		mrect.w = rect.w + 2;
+		mrect.h = rect.h + 2;
+		mrect.x = rect.x - 1;
+		mrect.y = rect.y - 1;
+		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+		SDL_RenderFillRect(gRenderer, &mrect);
+	}
+	render_text("Obdachlos", screen_width / 8 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16 + screen_width / 8 + screen_width / 16, screen_height * 3 / 5, 30, 1, 1);
+	// Kinder
+	rect.w = screen_width / 8;
+	rect.h = screen_height / 12;
+	rect.x = screen_width / 8 - screen_width / 16;
+	rect.y = screen_height * 3 / 5 - screen_height / 24 + screen_height / 12 + screen_height / 24;
+	SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
+	SDL_RenderFillRect(gRenderer, &rect);
+	SDL_GetMouseState(&xval, &yval);
+	if(xval > rect.x &&
+		xval < rect.x + rect.w &&
+		yval > rect.y &&
+		yval < rect.y + rect.h) {
+		SDL_Rect mrect;
+		mrect.w = rect.w + 2;
+		mrect.h = rect.h + 2;
+		mrect.x = rect.x - 1;
+		mrect.y = rect.y - 1;
+		SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
+		SDL_RenderFillRect(gRenderer, &mrect);
+	}
+	render_text("Kinder", screen_width / 8, screen_height * 3 / 5 + screen_height / 12 + screen_height / 24, 30, 1, 1);
+	// Urlaub
+	rect.w = screen_width / 8;
+	rect.h = screen_height / 12;
+	rect.x = screen_width / 8 - screen_width / 16 + screen_width / 8 + screen_width / 16;
+	rect.y = screen_height * 3 / 5 - screen_height / 24 + screen_height / 12 + screen_height / 24;
+	SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
+	SDL_RenderFillRect(gRenderer, &rect);
+	SDL_GetMouseState(&xval, &yval);
+	if(xval > rect.x &&
+		xval < rect.x + rect.w &&
+		yval > rect.y &&
+		yval < rect.y + rect.h) {
+		SDL_Rect mrect;
+		mrect.w = rect.w + 2;
+		mrect.h = rect.h + 2;
+		mrect.x = rect.x - 1;
+		mrect.y = rect.y - 1;
+		SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0xFF);
+		SDL_RenderFillRect(gRenderer, &mrect);
+	}
+	render_text("Urlaub", screen_width / 8 + screen_width / 8 + screen_width / 16, screen_height * 3 / 5 + screen_height / 12 + screen_height / 24, 30, 1, 1);
+}
+
+void render_arrow(int x, int y) {
+	double scale = 1.0;
+	SDL_Surface* arrow = IMG_Load("arrow.png");
+	SDL_Texture* arrow_texture = SDL_CreateTextureFromSurface(gRenderer, arrow);
+	SDL_Rect arrow_base;
+	arrow_base.x = 0;
+	arrow_base.y = 0;
+	arrow_base.w = 200;
+	arrow_base.h = 100;
+	SDL_Rect arrow_position;
+	arrow_position.x = x;
+	arrow_position.y = y;
+	if((double)screen_width / (double)5000 < (double)screen_height / (double)7500) {
+		scale = (double)screen_width / (double)5000;
+	} else {
+		scale = (double)screen_height / (double)7500;
+	}
+	arrow_position.w = (double)200 * (double)scale;
+	arrow_position.h = (double)100 * (double)scale;
+	SDL_RenderCopy(gRenderer, arrow_texture, &arrow_base, &arrow_position);
+	SDL_FreeSurface(arrow);
+	SDL_DestroyTexture(arrow_texture);
 }
