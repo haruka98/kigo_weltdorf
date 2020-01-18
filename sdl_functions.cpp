@@ -153,8 +153,8 @@ void render_person(int x, int y) {
 	SDL_Rect person_base;
 	person_base.x = 0;
 	person_base.y = 0;
-	person_base.w = 200;
-	person_base.h = 300;
+	person_base.w = 400;
+	person_base.h = 600;
 	SDL_Rect person_position;
 	person_position.x = x;
 	person_position.y = y;
@@ -174,8 +174,8 @@ void render_big_person(int x, int y, int color) {
 	SDL_Rect person_base;
 	person_base.x = 0;
 	person_base.y = 0;
-	person_base.w = 200;
-	person_base.h = 300;
+	person_base.w = 400;
+	person_base.h = 600;
 	SDL_Rect person_position;
 	person_position.x = x;
 	person_position.y = y;
