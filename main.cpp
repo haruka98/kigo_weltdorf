@@ -115,20 +115,20 @@ int main(int argc, char* argv[]) {
 					// Kinder
 					if(can_use_mouse == 1 && e.type == SDL_MOUSEBUTTONDOWN && x > screen_width / 8 - screen_width / 16 && x < screen_width / 8 - screen_width / 16 + screen_width / 8 && y > screen_height * 3 / 5 - screen_height / 24 + screen_height / 12 + screen_height / 24 && y < screen_height * 3 / 5 - screen_height / 24 + screen_height / 12 + screen_height / 24 + screen_height / 12) {
 						for(int i = 0; i < 27; i++) {
-							color[i] = 3;
+							color[i] = 0;
 						}
 						for(int i = 27; i < 100; i++) {
-							color[i] = 0;
+							color[i] = 3;
 						}
 						can_use_mouse = 0;
 					}
 					// Urlaub
 					if(can_use_mouse == 1 && e.type == SDL_MOUSEBUTTONDOWN && x > screen_width / 8 - screen_width / 16 + screen_width / 8 + screen_width / 16 && x < screen_width / 8 - screen_width / 16 + screen_width / 8 + screen_width / 16 + screen_width / 8 && y > screen_height * 3 / 5 - screen_height / 24 + screen_height / 12 + screen_height / 24 && y < screen_height * 3 / 5 - screen_height / 24 + screen_height / 12 + screen_height / 24 + screen_height / 12) {
 						for(int i = 0; i < 15; i++) {
-							color[i] = 3;
+							color[i] = 0;
 						}
 						for(int i = 15; i < 100; i++) {
-							color[i] = 0;
+							color[i] = 3;
 						}
 						can_use_mouse = 0;
 					}
